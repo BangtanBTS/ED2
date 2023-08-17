@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int vet[1000];
+
+void BubbleSort(int vet[], int tam){
+	for(int fim=tam-1; fim>0; fim--){
+		for(int i=0; i<fim; i++){
+			if(vet[i]>vet[i+1]){
+				int aux=vet[i];
+				vet[i]=vet[i+1];
+				vet[i+1]=aux;
+			}
+		}
+	}
+}
+
+int main(){
+	srand(time(0));
+	double timespent = 0.0;
+	for(int i=0; i<1000; i++){
+		vet[i]=rand()%2;
+    }
+    clock_t begin = clock();
+    BubbleSort(vet, 1000);
+    clock_t end = clock();
+
+    for(int i=0; i<1000; i++){
+		cout<<vet[i]<<" ";
+    }
+    cout<<endl;
+    timespent += (double)(end - begin) / CLOCKS_PER_SEC;
+
+    cout<<fixed<<setprecision(5);
+    cout<<"Timer: "<<timespent;
+}
