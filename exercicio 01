@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdio>
+using namespace std;
+
+void troca(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int metade(int *arr, int low, int high) {
+    int pivot = arr[high];
+    cout<<"Pivot: "<<pivot<<endl;
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            troca(&arr[i], &arr[j]);
+        }
+    }
+    troca(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void quickSort(int *arr, int low, int high) {
+    if (low < high) {
+        int pi = metade(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+void printArray(int *arr, int n) {
+
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+	int i, a;
+	char val[1];
+	//LEITURA DE ARQUIVO 
+	FILE *file = fopen("arq.txt", "r");
+	if(file==NULL){
+		cout<<"Erro";
+	}
+	char linha[50];
+	int cont=0;
+	while(fgets(linha, sizeof(linha), file) && cont < 15){
+		cout<<linha;
+		cont++;
+		i=0;
+		while(linha[i]!='.'){
+			if(i!=0) a*=10;
+			val[0] = linha[i];
+			cout<<linha[i]<<endl;
+			val[1]='\0';
+			a+=atoi(val);
+			cout<<val;
+			i++;
+			
+		}
+		cout<<a<<endl;
+	}
+	fclose(file);
+	
+	/*
+    int arr[] = {10, 1, 8, 9, 5, 7};
+    int n = 6;
+
+    cout << "Vetor original:" << endl;
+    printArray(arr, n);
+
+    quickSort(arr, 0, n - 1);
+
+    std::cout << "Vetor ordenado:" << std::endl;
+    printArray(arr, n);
+
+    return 0;*/
+}
+
+/*1. Zebre
+7. Parafuso
+10. Almondega
+2. Preço
+5. Batata
+3. Yasmin
+6. Amanda
+15. Verso
+11. Universo*/
