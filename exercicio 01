@@ -3,6 +3,82 @@
 #include <cstdio>
 using namespace std;
 
+void BubbleSort(vector<pair<int,string>> &lista, int tam){
+	for(int fim=tam-1; fim>0; fim--){
+		for(int i=0; i<fim; i++){
+			if(lista[i].first>lista[i+1].first){
+				pair<int, string>aux=lista[i];
+				lista[i]=lista[i+1];
+				lista[i+1]=aux;
+			}
+		}
+	}
+}
+
+void BubbleSortW(vector<pair<int,string>> &lista, int tam){
+	for(int fim=tam-1; fim>0; fim--){
+		for(int i=0; i<fim; i++){
+			if(lista[i].second>lista[i+1].second){
+				pair<int, string>aux=lista[i];
+				lista[i]=lista[i+1];
+				lista[i+1]=aux;
+			}
+		}
+	}
+}
+
+int main() {
+	vector<pair<int,string>>lista;
+	//LEITURA DE ARQUIVO 
+	FILE *file = fopen("arq.txt", "r");
+	if(file==NULL){
+		cout<<"Erro";
+	}
+	char linha[50];
+	int cont=0;
+	while(fgets(linha, sizeof(linha), file) && cont < 15){
+		cont++;
+		string f1,f2;
+		stringstream ss;
+		ss<<linha;
+		ss>>f1>>f2;
+		lista.push_back({stoi(f1),f2});
+		
+	}
+	fclose(file);
+	//Ordenacao por numero!!!
+	srand(time(0));
+	double timespent = 0.0;
+	clock_t begin = clock();
+	BubbleSort(lista, lista.size());
+	clock_t end = clock();
+	cout<<"Ordenção por numero: BubbleSort"<<endl;
+	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
+	timespent += (double)(end - begin) / CLOCKS_PER_SEC;
+    cout<<fixed<<setprecision(10);
+    cout<<"Timer: "<<timespent<<endl;
+	cout<<endl;
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	BubbleSortW(lista, lista.size());
+	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
+	
+}
+
+/*1. Zebre
+7. Parafuso
+10. Almondega
+2. Preço
+5. Batata
+3. Yasmin
+6. Amanda
+15. Verso
+11. Universo*/
+
+#include <bits/stdc++.h>
+#include <cstdlib>
+#include <cstdio>
+using namespace std;
+
 void troca(int *a, int *b) {
     int temp = *a;
     *a = *b;
@@ -39,56 +115,3 @@ void printArray(int *arr, int n) {
     }
     cout << endl;
 }
-
-int main() {
-	int i, a;
-	char val[1];
-	//LEITURA DE ARQUIVO 
-	FILE *file = fopen("arq.txt", "r");
-	if(file==NULL){
-		cout<<"Erro";
-	}
-	char linha[50];
-	int cont=0;
-	while(fgets(linha, sizeof(linha), file) && cont < 15){
-		cout<<linha;
-		cont++;
-		i=0;
-		while(linha[i]!='.'){
-			if(i!=0) a*=10;
-			val[0] = linha[i];
-			cout<<linha[i]<<endl;
-			val[1]='\0';
-			a+=atoi(val);
-			cout<<val;
-			i++;
-			
-		}
-		cout<<a<<endl;
-	}
-	fclose(file);
-	
-	/*
-    int arr[] = {10, 1, 8, 9, 5, 7};
-    int n = 6;
-
-    cout << "Vetor original:" << endl;
-    printArray(arr, n);
-
-    quickSort(arr, 0, n - 1);
-
-    std::cout << "Vetor ordenado:" << std::endl;
-    printArray(arr, n);
-
-    return 0;*/
-}
-
-/*1. Zebre
-7. Parafuso
-10. Almondega
-2. Preço
-5. Batata
-3. Yasmin
-6. Amanda
-15. Verso
-11. Universo*/
