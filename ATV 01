@@ -166,3 +166,4 @@ int main() {
 4. Yasmin
 15. Verso
 11. Universo
+//fputs(linha, file);
