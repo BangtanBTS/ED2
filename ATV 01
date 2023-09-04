@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string> 
+#include <fstream>
 using namespace std;
 
 void BubbleSort(vector<pair<int,string>> &lista, int tam){
@@ -111,13 +112,14 @@ void SelectionSortW(vector<pair<int,string>> &lista,int tam){
 int main() {
 	vector<pair<int,string>>lista;
 	//LEITURA DE ARQUIVO 
+	string f1,f2;
 	FILE *file = fopen("arq.txt", "r");
 	if(file==NULL){
 		cout<<"Erro";
 	}
 	char linha[50];
 	int cont=0;
-	string f1,f2;
+	
 	while(fgets(linha, sizeof(linha), file) && cont < 100){
 		cont++;
 		stringstream ss;
@@ -133,15 +135,17 @@ int main() {
 	BubbleSort(lista, lista.size());
 	//QuickSortNum(lista, 0, lista.size());
 	//SelectionSortNum(lista, lista.size());
+	fclose(file);
 	
 	ofstream arq1;
 	arq1.open("arq.txt");
 	for(int i=0; i<(int)lista.size(); i++){
-		string f1=to_string(lista[i].first);
+		f1=to_string(lista[i].first);
 		f1+=". "+lista[i].second+'\n';
 		arq1<<f1;
 	}
-	fclose(file);
+	arq1.close();
+	
 	clock_t end = clock();
 	cout<<"ORDENAÇÃO NUMÉRICA"<<endl;
 	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
@@ -150,12 +154,12 @@ int main() {
     cout<<"Timer: "<<timespent<<endl;
 	cout<<endl;
 	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	char vt[50];
-	int c;
 	FILE *file2 = fopen("arq2.txt", "r");
 	if(file2==NULL){
 		cout<<"Erro";
 	}
+	char vt[50];
+	int c=0;
 	while(fgets(vt, sizeof(vt), file2) && c < 100){
 		c++;
 		stringstream ss;
@@ -171,15 +175,17 @@ int main() {
 	BubbleSortW(lista, lista.size());
 	//QuickSortW(lista, 0, lista.size());
 	//SelectionSortW(lista, lista.size());
-	
-	ofstream arqq;
-	arqq.open("arq2.txt");
-	for(int i=0; i<(int)lista.size(); i++){
-		f1=to_string(lista[i].first);
-		f1+=". "+lista[i].second+'\n';
-		arqq<<f1;
-	}
 	fclose(file2);
+	
+	ofstream arq2;
+	arq2.open("arq2.txt");
+	for(int i=0; i<(int)lista.size(); i++){
+		string ff=to_string(lista[i].first);
+		ff+=". "+lista[i].second+'\n';
+		arq2<<ff;
+	}
+	arq2.close();
+	
 	clock_t endW = clock();
 	cout<<"ORDENAÇÃO ALFABÉTICA"<<endl;
 	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
