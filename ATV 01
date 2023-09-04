@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <cstdlib>
 #include <cstdio>
+#include <string> 
 using namespace std;
 
 void BubbleSort(vector<pair<int,string>> &lista, int tam){
@@ -116,16 +117,15 @@ int main() {
 	}
 	char linha[50];
 	int cont=0;
+	string f1,f2;
 	while(fgets(linha, sizeof(linha), file) && cont < 100){
 		cont++;
-		string f1,f2;
 		stringstream ss;
 		ss<<linha;
 		ss>>f1>>f2;
 		lista.push_back({stoi(f1),f2});
 		
 	}
-	fclose(file);
 	//ORDENACAO NUMERICA!!!
 	srand(time(0));
 	double timespent = 0.0;
@@ -133,6 +133,15 @@ int main() {
 	BubbleSort(lista, lista.size());
 	//QuickSortNum(lista, 0, lista.size());
 	//SelectionSortNum(lista, lista.size());
+	
+	ofstream arq1;
+	arq1.open("arq.txt");
+	for(int i=0; i<(int)lista.size(); i++){
+		string f1=to_string(lista[i].first);
+		f1+=". "+lista[i].second+'\n';
+		arq1<<f1;
+	}
+	fclose(file);
 	clock_t end = clock();
 	cout<<"ORDENAÇÃO NUMÉRICA"<<endl;
 	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
@@ -140,7 +149,21 @@ int main() {
     cout<<fixed<<setprecision(10);
     cout<<"Timer: "<<timespent<<endl;
 	cout<<endl;
-	
+	//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	char vt[50];
+	int c;
+	FILE *file2 = fopen("arq2.txt", "r");
+	if(file2==NULL){
+		cout<<"Erro";
+	}
+	while(fgets(vt, sizeof(vt), file2) && c < 100){
+		c++;
+		stringstream ss;
+		ss<<vt;
+		ss>>f1>>f2;
+		lista.push_back({stoi(f1),f2});
+		
+	}
 	//ORDENACAO ALFABETICA
 	srand(time(0));
 	double timespentW = 0.0;
@@ -148,22 +171,20 @@ int main() {
 	BubbleSortW(lista, lista.size());
 	//QuickSortW(lista, 0, lista.size());
 	//SelectionSortW(lista, lista.size());
+	
+	ofstream arqq;
+	arqq.open("arq2.txt");
+	for(int i=0; i<(int)lista.size(); i++){
+		f1=to_string(lista[i].first);
+		f1+=". "+lista[i].second+'\n';
+		arqq<<f1;
+	}
+	fclose(file2);
 	clock_t endW = clock();
 	cout<<"ORDENAÇÃO ALFABÉTICA"<<endl;
 	for(int i=0;i<(int)lista.size();i++) cout<<lista[i].first<<" "<<lista[i].second<<endl;
 	timespentW += (double)(endW - beginW) / CLOCKS_PER_SEC;
     cout<<fixed<<setprecision(10);
     cout<<"Timer: "<<timespent<<endl;
+    
 }
-1. Valor
-6. Amanda
-7. Troca
-3. Valsa
-2. Preco
-8. Parafuso
-10. Almondega
-5. Batata
-4. Yasmin
-15. Verso
-11. Universo
-//fputs(linha, file);
