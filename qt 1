@@ -1,0 +1,55 @@
+#include <bits/stdc++.h> 
+#include <fstream>
+using namespace std;
+
+void troca(string &a, string &b) {
+    string temp = a;
+    a = b;
+    b = temp;
+}
+int Metade(vector<string> &lista, int low, int high) {
+    string pivot = lista[low];
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (lista[j] <= pivot){
+            i++;
+            troca(lista[i], lista[j]);
+        }
+    }
+    troca(lista[i + 1], lista[high]);
+    return (i + 1);
+}
+
+void QuickSort(vector<string> &lista, int low, int high) {
+    if (low < high) {
+        int pi = Metade(lista, low, high);
+        QuickSort(lista, low, pi - 1);
+        QuickSort(lista, pi + 1, high);
+    }
+}
+int main () {
+	vector<string>lista;
+	
+	ifstream arq;
+	string linha;
+	arq.open("arq.txt");
+	if(arq.is_open()){
+		while(getline(arq, linha)){
+			cout<<linha<<endl;
+			//lista.push_back(stoi(linha));
+		}
+	}
+	else{
+		cout<<"ERRO"<<endl;
+	}
+	arq.close();
+	QuickSort(lista, 0, lista.size());
+	
+	//ofstream arq1;
+	//arq1.open("arq.txt");
+	//for(int i=0; i<(int)lista.size(); i++){
+	//	arq1<<lista[i];
+	//}
+	//arq1.close();
+}
