@@ -1,1 +1,45 @@
-fgh
+#include <bits/stdc++.h> 
+#include <fstream>
+using namespace std;
+
+void troca(string &a, string &b) {
+    string temp = a;
+    a = b;
+    b = temp;
+}
+int Metade(vector<string> &lista, int low, int high) {
+    string pivot = lista[high];
+    int i = (low - 1);
+
+    for (int j = low; j <= high - 1; j++) {
+        if (lista[j] <= pivot){
+            i++;
+            troca(lista[i], lista[j]);
+        }
+    }
+    troca(lista[i + 1], lista[high]);
+    return (i + 1);
+}
+
+void QuickSort(vector<string> &lista, int low, int high) {
+    if (low < high) {
+        int pi = Metade(lista, low, high);
+        QuickSort(lista, low, pi - 1);
+        QuickSort(lista, pi + 1, high);
+    }
+}
+void imprimi(vector<string>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i]<<" ";
+	}
+}
+
+int main () {
+	vector<string>lista={"[Viuva Negra]","[Capitao Marvel]", "[Wanda]", "[Capitao America]", "[Homem de Ferro]"};
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Vetor Ordenado:"<<endl;
+	QuickSort(lista, 0, lista.size()-1);
+	imprimi(lista);
+}
