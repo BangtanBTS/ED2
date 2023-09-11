@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+using namespace std;
+void SelectionSort(vector<pair<int,pair<string,string>>>&lista,int tam){	
+	for(int i=0;i<tam;i++){
+		for(int j=i+1;j<tam;j++){
+			if(lista[j].second.second<lista[i].second.second){
+				pair<int,pair<string,string>> aux=lista[i];
+				lista[i]=lista[j];
+				lista[j]=aux;
+			}
+		}
+	}
+}
+int main() {
+	vector<pair<int,pair<string,string>>> lista={"1, Megazorde","Gustavo",
+	"3, Capitao Marvel, Antonio", "2, Feticeira, Maria"};
+	SelectionSort(lista, lista.size());
+}
