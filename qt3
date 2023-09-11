@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+
+using namespace std;
+
+void BubbleSort(vector<pair<int, string>>&lista, int tam){
+	for(int fim=tam-1; fim>0; fim--){
+		for(int i=0; i<fim; i++){
+			if(lista[i].second>lista[i+1].second){
+				pair<int, string>aux=lista[i];
+				lista[i]=lista[i+1];
+				lista[i+1]=aux;
+			}
+		}
+	}
+}
+
+void imprimi(vector<pair<int, string>>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i].first<<"-"<<lista[i].second<<" ";
+	}
+}
+
+int main ()
+{
+	vector<pair<int, string>> lista={{8,"Fortnite"},{9,"League of Legends"},
+	{6,"CrossFire"}, {7,"Roblox"}, {8,"Minecraft"}};
+	
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl<<endl;
+	cout<<"Vetor Ordenado: Alfabeticaq"<<endl;
+	BubbleSort(lista, lista.size());
+	imprimi(lista);
+}
