@@ -8,7 +8,7 @@ void troca(string &a, string &b) {
     b = temp;
 }
 int Metade(vector<string> &lista, int low, int high) {
-    string pivot = lista[low];
+    string pivot = lista[high];
     int i = (low - 1);
 
     for (int j = low; j <= high - 1; j++) {
@@ -28,28 +28,18 @@ void QuickSort(vector<string> &lista, int low, int high) {
         QuickSort(lista, pi + 1, high);
     }
 }
+void imprimi(vector<string>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i]<<" ";
+	}
+}
+
 int main () {
-	vector<string>lista;
-	
-	ifstream arq;
-	string linha;
-	arq.open("arq.txt");
-	if(arq.is_open()){
-		while(getline(arq, linha)){
-			cout<<linha<<endl;
-			//lista.push_back(stoi(linha));
-		}
-	}
-	else{
-		cout<<"ERRO"<<endl;
-	}
-	arq.close();
-	QuickSort(lista, 0, lista.size());
-	
-	//ofstream arq1;
-	//arq1.open("arq.txt");
-	//for(int i=0; i<(int)lista.size(); i++){
-	//	arq1<<lista[i];
-	//}
-	//arq1.close();
+	vector<string>lista={"[Viuva Negra]","[Capitao Marvel]", "[Wanda]", "[Capitao America]", "[Homem de Ferro]"};
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Vetor Ordenado:"<<endl;
+	QuickSort(lista, 0, lista.size()-1);
+	imprimi(lista);
 }
