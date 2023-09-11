@@ -7,6 +7,7 @@ void troca(string &a, string &b) {
     a = b;
     b = temp;
 }
+
 int Metade(vector<string> &lista, int low, int high) {
     string pivot = lista[high];
     int i = (low - 1);
@@ -28,18 +29,45 @@ void QuickSort(vector<string> &lista, int low, int high) {
         QuickSort(lista, pi + 1, high);
     }
 }
+
 void imprimi(vector<string>&lista){
 	for(int i=0; i<(int)lista.size(); i++){
 		cout<<lista[i]<<" ";
 	}
 }
 
+void busca_binaria(vector<string>&lista, string nome, int tam){
+	int  inicio, fim, meio;
+	inicio=0;
+	fim=tam-1;
+	while (inicio<fim){
+		meio=(inicio+fim)/2;
+		if(lista[meio]>=nome){
+			fim=meio;
+		}
+		else{
+			inicio=meio+1;
+		}
+	}
+	if(lista[inicio]==nome){
+		cout<<"Nome encontrado: "<<lista[inicio]<<endl;
+	}
+	else{
+		cout<<"Nome não encontrado"<<endl;
+	}
+}
+
 int main () {
-	vector<string>lista={"[Viuva Negra]","[Capitao Marvel]", "[Wanda]", "[Capitao America]", "[Homem de Ferro]"};
+	vector<string>lista={"Viuva Negra","Capitao Marvel", "Wanda", "Capitao America", "Homem de Ferro"};
 	cout<<"Vetor Original:"<<endl;
 	imprimi(lista);
-	cout<<endl;
+	cout<<endl<<endl;
 	cout<<"Vetor Ordenado:"<<endl;
 	QuickSort(lista, 0, lista.size()-1);
 	imprimi(lista);
+	cout<<endl<<endl;
+	string nome;
+	cout<<"Digite o nome que deseja encontrar: ";
+	getline(cin, nome);
+	busca_binaria(lista, nome, lista.size());
 }
