@@ -31,7 +31,6 @@ int main() {
 	cout<<"Vetor Ordenado:"<<endl;
 	BubbleSort(lista, lista.size());
 	imprimi(lista);
-	cout<<endl<<endl;
 }
 
 
