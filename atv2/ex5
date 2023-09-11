@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+using namespace std;
+
+void BubbleSort(vector<string> &lista, int tam){
+	for(int fim=tam-1; fim>0; fim--){
+		for(int i=0; i<fim; i++){
+			if(lista[i]>lista[i+1]){
+				string aux=lista[i];
+				lista[i]=lista[i+1];
+				lista[i+1]=aux;
+			}
+		}
+	}
+}
+
+void imprimi(vector<string>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i]<<" ";
+	}
+}
+
+int main() {
+	vector<string>lista={"[Estupefaço]", "[Aguamenti]", "[Expelliarmus]", "[Abaffiato]",
+	"[Petrificus Totalus]", "[Expectro Patronum]", "[Accio]"};
+	
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl<<endl;
+	cout<<"Vetor Ordenado:"<<endl;
+	BubbleSort(lista, lista.size());
+	imprimi(lista);
+	cout<<endl<<endl;
+}
+
+
