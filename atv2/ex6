@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+#include <iostream>
+#include <iomanip> 
+using namespace std;
+
+string BuscaBinaria(vector<pair<int, string>>&lista, int chave, int tam) {
+	int inicio=0;
+	int fim=tam-1;
+	int meio;
+	while(inicio<fim){
+		meio=(inicio+fim)/2;
+		if(lista[meio].first>=chave) fim=meio;
+		else inicio=meio+1;
+	}
+	if(chave==lista[fim].first){
+		return lista[fim].second;
+	}
+	return "Nao";
+}
+
+void imprimi(vector<pair<int, string>>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i].first<<" "<<lista[i].second<<endl;
+	}
+}
+
+int main ()
+{
+	vector<pair<int, string>>lista={{1,"Capitão América "},{2,"Capitã Marvel"},
+	{4,"Homem de Ferro"}, {8,"Pantera Negra "}, {10,"Thor"}};
+	
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Qual encarnação do Doctor Who voce quer encontrar: ";
+	int chave;
+	cin>>chave;
+	cout << BuscaBinaria(lista, chave, lista.size()) << "\n";
+}
