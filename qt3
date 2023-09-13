@@ -1,14 +1,48 @@
 #include <bits/stdc++.h>
 #include <string> 
 #include <fstream>
-
+#include <iostream>
 using namespace std;
 
-void BubbleSort(vector<pair<int, string>>&lista, int tam){
+void merge(int l, int r, int mid, vector<pair<string,int>> &lista){
+    vector<pair<string,int>> aux;
+    int left=l,right=mid+1;
+    while(left<=mid && right<=r){
+        if(lista[left].second <= lista[right].second){
+            aux.push_back(lista[left]);
+            left++;
+        }
+        else{
+            aux.push_back(lista[right]);
+            right++;
+        }
+    }
+    while(left<=mid){
+        aux.push_back(lista[left]);
+        left++;
+    }
+    while(right<=r){
+        aux.push_back(lista[right]);
+        right++;
+    }
+    for(int i=l; i<=r; i++){
+        lista[i]=aux[i-l];
+    }
+}
+void MergeSort(int l, int r, vector<pair<string,int>> &lista){
+    if(r>l){
+        int mid=(l+r)/2;
+        MergeSort(l,mid,lista);
+        MergeSort(mid+1,r,lista);
+        merge(l,r,mid,lista);
+    }
+}
+
+void BubbleSort(vector<pair<string,int>> &lista, int tam){
 	for(int fim=tam-1; fim>0; fim--){
 		for(int i=0; i<fim; i++){
-			if(lista[i].second>lista[i+1].second){
-				pair<int, string>aux=lista[i];
+			if(lista[i].first>lista[i+1].first){
+				pair<string,int>aux=lista[i];
 				lista[i]=lista[i+1];
 				lista[i+1]=aux;
 			}
@@ -16,21 +50,25 @@ void BubbleSort(vector<pair<int, string>>&lista, int tam){
 	}
 }
 
-void imprimi(vector<pair<int, string>>&lista){
+void imprimi(vector<pair<string,int>>&lista){
 	for(int i=0; i<(int)lista.size(); i++){
-		cout<<lista[i].first<<"-"<<lista[i].second<<" ";
+		cout<<lista[i].first<<" - Nota: "<<lista[i].second<<endl;
 	}
 }
 
 int main ()
 {
-	vector<pair<int, string>> lista={{8,"Fortnite"},{9,"League of Legends"},
-	{6,"CrossFire"}, {7,"Roblox"}, {8,"Minecraft"}};
+	vector<pair<string,int>> lista={{"Fortnite",8},{"League of Legends",9},{"CrossFire",6}, {"Roblox",7}, {"Minecraft",8}};
 	
 	cout<<"Vetor Original:"<<endl;
 	imprimi(lista);
 	cout<<endl<<endl;
-	cout<<"Vetor Ordenado: Alfabeticaq"<<endl;
+	cout<<"Vetor Ordenado: Alfabetica"<<endl;
 	BubbleSort(lista, lista.size());
 	imprimi(lista);
+	cout<<endl<<endl;
+	cout<<"Vetor Ordenado: Numerica"<<endl;
+	MergeSort(0, lista.size()-1, lista);
+	imprimi(lista);
+	;
 }
