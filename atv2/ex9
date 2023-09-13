@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+#include <iostream>
+#include <iomanip> 
+using namespace std;
+
+void InsertionSort(vector<pair<string,double>>&lista){
+    int i;
+    for(int j=0;j<(int)lista.size();j++){
+        pair<string, double>key=lista[j];
+        i=j-1;
+        while(i>-1 and lista[i].second>key.second){
+            lista[i+1] = lista[i];
+            i=i-1;
+        }
+        lista[i+1]=key;
+    }
+}
+
+void imprimi(vector<pair<string,double>>&lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<fixed<<setprecision(1);
+		cout<<lista[i].first<<" - Nota: "<<lista[i].second<<endl;
+	}
+}
+
+int main ()
+{
+	vector<pair<string,double>>lista={{"Capitão América ",8.9},{"Capitã Marvel",8.5},
+	{"Homem de Ferro",9.7}, {"Pantera Negra ",9.5}, {"Thor",8.2}};
+	
+	cout<<"Vetor Original:"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	pair<string, double>aux;
+	int n;
+	double nota;
+	string nome;
+	cout<<"Quantas figurinhas voce quer add na lista: ";
+	cin>>n;
+	//cout<<"size lista: "<<lista.size()<<endl;
+	for(int i=0; i<n; i++){
+		nota=0.0;
+		nome=" ";
+		cout<<"Qual o nome da figurinha "<<i+1<<": ";
+		cin.ignore();
+		getline(cin, nome);
+		//cin>>nome;
+		cout<<"Qual a raridade da figurinha " <<i+1<<": ";
+		cin>>nota;
+		lista.push_back({nome, nota});
+	}
+	//cout<<"size lista: "<<lista.size()<<endl;
+	cout<<endl;
+	cout<<"Lista por ordem de inserção"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Vetor Ordenado"<<endl;
+	InsertionSort(lista);
+	imprimi(lista);
+	
+}
