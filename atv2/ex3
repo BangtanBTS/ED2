@@ -73,7 +73,7 @@ int main ()
 	cout<<"Vetor Ordenado: Numerica"<<endl;
 	MergeSort(lista, 0, lista.size()-1);
 	imprimi(lista);
-	cout<<endl<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl<<endl;
+	cout<<endl<<"++++++++++++++++++++++++++++++"<<endl<<endl;
 	cout<<"Digite o nome do jogo:"<<endl;
 	string nome;
 	getline(cin, nome);
