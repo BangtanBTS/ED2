@@ -1,0 +1,72 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void SelectionSort(vector<pair<string,int>> &lista,int tam){
+	
+	pair<string,int> aux;
+	for(int i=0;i<tam-1;i++){
+		for(int j=i+1;j<tam;j++){
+			if(lista[j].first<lista[i].first){
+				aux=lista[i];
+				lista[i]=lista[j];
+				lista[j]=aux;
+			}
+		}
+	}
+}
+
+int BuscaTernaria(int size, vector<pair<string,int>> lista, string ep){
+    int left = 0;
+    int right = size-1;
+
+    while(left<=right){
+      int td = left + (right - left)/3;
+      int te = right - (right - left)/3;
+      if (ep == lista[td].first) return td;
+      if (ep == lista[te].first) return te;
+      if (ep < lista[td].first){
+        right = td - 1;
+        continue;
+      }
+      if (ep > lista[te].first){
+        left = te + 1;
+        continue;
+      }
+      left = td + 1;
+      right = te - 1;
+    }
+    return -1;
+}
+
+void imprimi(vector<pair<string, int>>lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<lista[i].first<<" "<<lista[i].second<<endl;
+	}
+}
+
+int main() {
+	vector<pair<string, int>>lista={{"The Man Trap",10},{"Charlie X",14},
+	{"The Naked Time",12},{"The Enemy Within",16,},{"Mudd's Women",18}};
+	SelectionSort(lista, lista.size());
+	//imprimi(lista);
+	cout<<"Digite 1 para procura episódio"<<endl;
+	cout<<"Digite 2 para verificar a classificação indicativa do epsódio"<<endl;
+	int op;
+	cin>>op;
+	cin.ignore();
+	cout<<endl<<"Digite o nome do epsódio"<<endl;
+	string ep;
+	getline(cin,ep);
+	int x = BuscaTernaria(lista.size(), lista, ep);
+	if(op==1){
+		if(x != -1) cout<<"Episodio esta na lista"<<endl;
+		else cout<<"Episodio nao esta na lista"<<endl;
+	}
+	else{
+		if(lista[x].second==10) cout<<"Classificação indicativa acima de 10 anos"<<endl;
+		else if(lista[x].second==12) cout<<"Classificação indicativa acima de 12 anos"<<endl;
+		else if(lista[x].second==14) cout<<"Classificação indicativa acima de 14 anos"<<endl;
+		else if(lista[x].second==16) cout<<"Classificação indicativa acima de 16 anos"<<endl;
+		else if(lista[x].second==18) cout<<"Classificação indicativa acima de 18 anos"<<endl;
+	}
+}
