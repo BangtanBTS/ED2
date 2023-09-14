@@ -48,8 +48,8 @@ void imprimi(vector<pair<string,pair<string,double>>>lista){
 
 int main ()
 {
-	vector<pair<string,pair<string,double>>>lista= {{"Street Fighter",{"Ryu",8.7}},
-	{"The Last of Us",{"Ellie",6.7}},{"Pokemon",{"Pikachu",8.9}},{"Tomb Raider",{"Lara Croft",5.0}}};
+	vector<pair<string,pair<string,double>>>lista= {{"Maria Eduarda",{"Freya",8.7}},
+	{"Luiz Gustavo",{"Thorin",6.7}},{"Ana Maria",{"Astrid",8.9}}};
 	cout<<"Vetor Original"<<endl;
 	imprimi(lista);
 	cout<<endl;
