@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class  NO{
+	public:
+	string item;
+	NO *esq;
+	NO *dir;
+};
+class tree{
+	NO*raiz;
+ public:
+	tree();
+	void inserir(string nome);
+	void inserir(NO *p, NO**r, string nome);
+	string Buscar(string nome);
+	void print(NO*r);
+	void print();
+};
+tree::tree(){
+	raiz=0;
+}
+void tree::inserir(NO *p, NO**r, string nome){
+	if(!(*r)) *r=p;
+	else{
+		if(nome<(*r)->item) inserir(p, &((*r)->esq),nome);
+		else inserir(p, &((*r)->dir),nome);
+	}
+}
+
+void tree::inserir(string nome){
+	NO*y =new NO;
+	y->item=nome;
+	inserir(y, &raiz, nome);
+}
+
+void tree::print(NO * r){
+	if(r){
+		print(r->esq);
+		print(r->dir);
+		cout << r->item << "\n";
+	}
+}
+
+void tree::print(){
+	print(raiz);
+}
+
+string tree::Buscar(string nome){
+	if(raiz==0) return "NULL";
+	NO *P=raiz; 
+	while(P->item != nome){
+		if(P==0) return "NULL";
+		if(nome<P->item) P=P->esq;
+		else P=P->dir;
+	}
+	return P->item;
+}
+int main() {
+	tree av;
+	//inserir nomes
+	av.inserir("Frodo");
+	av.inserir("Sam");
+	av.inserir("Merry");
+	av.inserir("Pippin");
+	av.inserir("Gandalf");
+	av.inserir("Aragorn");
+	av.inserir("Boromir");
+	av.inserir("Legolas");
+	av.inserir("Gimli");
+	//Buscar nomes
+	cout<<av.Buscar("Merry")<<endl;
+	cout<<av.Buscar("Gimli")<<endl;
+}
