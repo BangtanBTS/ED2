@@ -1,0 +1,102 @@
+#include <bits/stdc++.h>
+#include <string> 
+#include <fstream>
+
+using namespace std;
+
+void SelectionSort(vector<pair<string,pair<string,double>>>&lista,int tam){	
+	for(int i=0;i<tam;i++){
+		for(int j=i+1;j<tam;j++){
+			if(lista[j].second.first<lista[i].second.first){
+				pair<string,pair<string,double>> aux=lista[i];
+				lista[i]=lista[j];
+				lista[j]=aux;
+			}
+		}
+	}
+}
+
+void heapify(vector<pair<string,pair<string,double>>>&lista, int n, int i) 
+{ 
+    int t = i; 
+    int left = 2*i + 1;  
+    int right = 2*i + 2;
+    if (left<n and lista[left].second.second > lista[t].second.second) t=left;
+    if (right<n and lista[right].second.second > lista[t].second.second) t=right;
+    if (t!=i){
+        swap(lista[i],lista[t]); 
+        heapify(lista,n,t); 
+    } 
+} 
+
+void heapsort(vector<pair<string,pair<string,double>>> &lista, int tam) 
+{ 
+    for (int i=tam/2-1; i>=0; i--) heapify(lista,tam,i);
+    for (int i=tam-1; i>=0; i--){
+        swap(lista[0], lista[i]); 
+        heapify(lista, i, 0); 
+    } 
+}
+
+void merge(vector<pair<string,pair<string,double>>> &lista, int inicio, int meio, int fim){
+    vector<pair<string,pair<string,double>>> aux;
+    int left=inicio,right=meio+1;
+    while(left<=meio && right<=fim){
+        if(lista[left].second.first <= lista[right].second.first){
+            aux.push_back(lista[left]);
+            left++;
+        }
+        else{
+            aux.push_back(lista[right]);
+            right++;
+        }
+    }
+    while(left<=meio){
+        aux.push_back(lista[left]);
+        left++;
+    }
+    while(right<=fim){
+        aux.push_back(lista[right]);
+        right++;
+    }
+    for(int i=inicio; i<=fim; i++){
+        lista[i]=aux[i-inicio];
+    }
+}
+void MergeSort(vector<pair<string,pair<string,double>>> &lista, int inicio, int fim){
+    if(fim>inicio){
+        int meio=(inicio+fim)/2;
+        MergeSort(lista, inicio, meio);
+        MergeSort(lista, meio+1, fim);
+        merge(lista, inicio, meio, fim);
+    }
+}
+
+void imprimi(vector<pair<string,pair<string,double>>>lista){
+	for(int i=0; i<(int)lista.size(); i++){
+		cout<<"Jogo: "<<lista[i].first<<
+		" _ Jogador: "<<lista[i].second.first<<
+		" _ Nota: "<<lista[i].second.second<<endl;
+	}
+}
+
+int main ()
+{
+	vector<pair<string,pair<string,double>>>lista= {{"Maria Eduarda",{"Freya",8.7}},
+	{"Luiz Gustavo",{"Thorin",6.7}},{"Ana Maria",{"Astrid",8.9}},{"Daniel",{"Escudeira",5.9}}};
+	cout<<"Vetor Original"<<endl;
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Ordenação por nivel/nota"<<endl;
+	heapsort(lista, lista.size());
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Ordenação por nome dos jogadores: Alfabetica"<<endl;
+	SelectionSort(lista, lista.size());
+	imprimi(lista);
+	cout<<endl;
+	cout<<"Ordenação por nome dos personagem: Alfabetica"<<endl;
+	MergeSort(lista, 0, lista.size()-1);
+	imprimi(lista);
+	
+}
