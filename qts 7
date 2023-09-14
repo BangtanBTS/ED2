@@ -1,30 +1,20 @@
 #include <bits/stdc++.h>
 #include <string> 
 #include <fstream>
+
 using namespace std;
-void SelectionSort(vector<pair<int,pair<string,string>>>&lista,int tam){	
+
+void SelectionSort(vector<pair<string,pair<string,double>>>&lista,int tam){	
 	for(int i=0;i<tam;i++){
 		for(int j=i+1;j<tam;j++){
-			if(lista[j].second.second<lista[i].second.second){
-				pair<int,pair<string,string>> aux=lista[i];
+			if(lista[j].second.first<lista[i].second.first){
+				pair<string,pair<string,double>> aux=lista[i];
 				lista[i]=lista[j];
 				lista[j]=aux;
 			}
 		}
 	}
 }
-int main() {
-	vector<pair<int,pair<string,string>>> lista={"1, Megazorde","Gustavo",
-	"3, Capitao Marvel, Antonio", "2, Feticeira, Maria"};
-	SelectionSort(lista, lista.size());
-}
-//////////////////////////////////////////////////////////////////
-#include <bits/stdc++.h>
-#include <string> 
-#include <fstream>
-#include <iostream>
-#include <iomanip> 
-using namespace std;
 
 void heapify(vector<pair<string,pair<string,double>>>lista, int n, int i) 
 { 
@@ -32,9 +22,7 @@ void heapify(vector<pair<string,pair<string,double>>>lista, int n, int i)
     int left = 2*i + 1;  
     int right = 2*i + 2;
     if (left<n and lista[left].second.second > lista[t].second.second) t=left;
-    
     if (right<n and lista[right].second.second > lista[t].second.second) t=right;
-    
     if (t!=i){
         swap(lista[i],lista[t]); 
         heapify(lista,n,t); 
@@ -43,8 +31,8 @@ void heapify(vector<pair<string,pair<string,double>>>lista, int n, int i)
 
 void heapsort(vector<pair<string,pair<string,double>>> &lista, int tam) 
 { 
-    for (int i=tam/2-1;i>=0;i--) heapify(lista,tam,i);
-    for (int i=tam-1;i>=0;i--){
+    for (int i=tam/2-1; i>=0; i--) heapify(lista,tam,i);
+    for (int i=tam-1; i>=0; i--){
         swap(lista[0], lista[i]); 
         heapify(lista, i, 0); 
     } 
@@ -61,11 +49,15 @@ void imprimi(vector<pair<string,pair<string,double>>>lista){
 int main ()
 {
 	vector<pair<string,pair<string,double>>>lista= {{"Street Fighter",{"Ryu",8.7}},
-	{"The Last of Us",{"Ellie",6.7}},{"Tomb Raider",{"Lara Croft",9.7}},{"Pokemon",{"Pikachu",8.9}}};
+	{"The Last of Us",{"Ellie",6.7}},{"Pokemon",{"Pikachu",8.9}},{"Tomb Raider",{"Lara Croft",5.0}}};
+	cout<<"Vetor Original"<<endl;
 	imprimi(lista);
 	cout<<endl;
 	cout<<"Ordenação por nivel/nota"<<endl;
 	heapsort(lista, lista.size());
 	imprimi(lista);
+	cout<<endl;
+	cout<<"Ordenação por nome dos jogadores: Alfabetica"<<endl;
+	SelectionSort(lista, lista.size());
+	imprimi(lista);
 }
-
