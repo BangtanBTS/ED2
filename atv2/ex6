@@ -28,8 +28,8 @@ void imprimi(vector<pair<int, string>>&lista){
 
 int main ()
 {
-	vector<pair<int, string>>lista={{1,"Capitão América "},{2,"Capitã Marvel"},
-	{4,"Homem de Ferro"}, {8,"Pantera Negra "}, {10,"Thor"}};
+	vector<pair<int, string>>lista={{1,"William Hartnell"},{2,"Patrick Troughton"},
+	{4,"Jon Pertwee"}, {8,"Tom Baker"}, {10,"Peter Davison"}};
 	
 	cout<<"Vetor Original:"<<endl;
 	imprimi(lista);
