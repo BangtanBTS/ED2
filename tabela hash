@@ -2,38 +2,53 @@
 #include <stdlib.h>
 using namespace std;
 
-struct dados{
-	int info;
-	float valor;
-};
+#define tam 50
 
-struct hashh{
-	int qtd, tamanho;
-	struct dados **itens;
-};
+struct elemento{
+	string valor;
+}typedef elemento;
 
-typedef struct hashh Hash; 
+struct tabelaHash{
+	elemento* tabela[tam];
+}typedef tabelaHash;
 
-Hash* criaHash(int size);
-void liberaHash(Hash*ha);
-int insere_SemColisao(Hash* ha, struct dados d);
-int busca_SemColisao(Hash* ha, int info, struct dados* d);
-int insere_EndAberto(Hash* ha, struct dados d);
-int busca_EndAberto(Hash* ha, int info, struct dados* d);
+tabelaHash* criaHash();
+int valorHash(int *chave)
+void inserir_(tabelaHash *th);
+elemento busca_(tabelaHash *th, string *valor); //O(k)
+void imprimir(tabelaHsh* th)
 
-//função criaHash (int size)
-Hash* criaHash (int size){
-	Hash* ha = (Hash*) malloc (sizeof (Hash) );
-	if (ha != NULL){
-		int i;
-		ha->size = size;
-		ha->itens = (struct dados**) malloc (size * sizeof(struct dados*));
-		if (ha->itens == NULL) {
-			free (ha);
-			return NULL;
-		}
-		ha->qtd = 0;
-		for (i=0; i < ha->size; i++) ha->itens [i]= NULL;
+//função criaHash
+tabelaHash* criaHash(){
+	tabelaHash* th = (tabelaHash*) malloc(sizeof(tabelaHash));
+	for(int i=0; i<tam; i++){
+		th->tabela[i]=NULL;
 	}
-	return ha;
+	return th;
+}
+//valor hash
+int valorHash(int *chave){
+	int vh=0;
+	for(int i=0;chave[i]!='\0'; i++){
+		vh=(vh*3+chave[i])%10;
+	}
+	return vt;
+}
+//inserir elemento
+void inserir(tabelaHash*th, string *valor){
+	int vh=valorHash(valor);
+	elemento *novo = (elemento*) malloc(sizeof (elemento));
+	strcpy(novo->valor, valor);
+	novo->prox=th->tabela[vh];
+	th->tabela[vh]=novo;
+}
+elemento busca(tabelaHash *th, string *valor){
+	int vh = valorHash(valor);
+	elemento *atual = th->tabela[vh];
+	while(atual != NUll){
+		if(strucmp(atual->valor, valor)==0)
+		return atual;
+		atual=atual->prox;
+	}
+	return NUll;
 }
