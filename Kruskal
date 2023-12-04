@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// DSU {{{
+const int MAXN = 1000;
+
+vector<int> S(MAXN, -1);
+vector<int> P(MAXN, -1);
+
+int leader(int x) { // achar quais caras eu tenho que unir
+  if(P[x] == -1) return x;
+  return P[x] = leader(P[x]);
+}
+void merge(int a, int b) { // unir os caras que eu tenho que unir
+  a = leader(a), b = leader(b);
+  if(a != b) {
+    if(S[a] < S[b]) swap(a, b); // small to large merging
+    P[b] = a, S[a] += S[b];
+  }
+}
+//}}}
+
+int main() {
+  
+}
